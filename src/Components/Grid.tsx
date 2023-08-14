@@ -8,6 +8,7 @@ const Grid = styled.div`
   margin: 5px;
   padding: 5px;
   grid-template-columns: auto auto auto;
+  background-color: black;
 `;
 
 export default Grid;

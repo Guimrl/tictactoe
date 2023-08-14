@@ -5,6 +5,7 @@ const SquareWrapper = styled.div`
   height: 150px;
   width: 150px;
   margin: 5px;
+  background-color: white;
 `
 
 const Square = ({checked, onClick}) => {

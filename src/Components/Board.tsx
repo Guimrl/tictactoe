@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import  { End, IndicateTurn } from './IndicateTurn';
+import { useCallback, useEffect, useState } from 'react';
+import { End, IndicateTurn } from './IndicateTurn';
 import Grid from './Grid';
 import Square from './Square';
 import winCondition from './WinCondition';
@@ -18,11 +18,16 @@ export function Board() {
   const [winner, setWinner] = useState(undefined);
   const [history, setHistory] = useState([Array(9).fill(undefined)]);
 
-  useEffect(() => {
-    if (cells) {
-      setWinner(winCondition(cells));
+  const checkWinner = useCallback(() => {
+    if (cells !== undefined) {
+      const winner = winCondition(cells);
+      setWinner(winner);
     }
-  }, [JSON.stringify(cells)]);
+  }, [cells, setWinner]);
+
+  useEffect(() => {
+    checkWinner();
+  }, [checkWinner]);
 
   useEffect(() => {
     setTurn(history.length % 2 === 0 ? player2 : player1);
